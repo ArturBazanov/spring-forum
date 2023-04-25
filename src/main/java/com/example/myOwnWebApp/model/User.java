@@ -1,4 +1,4 @@
-package com.example.myOwnWebApp.models;
+package com.example.myOwnWebApp.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "consumer")
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 public class User{
@@ -23,8 +24,10 @@ public class User{
     private String password;
     private boolean active;
     @ElementCollection(targetClass = ROLE.class, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns= @JoinColumn(name = "user_id"))
-    private Set<ROLE> roleSet;
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id")
+    )
+    @Enumerated(EnumType.STRING)
+    private Set<ROLE> roles;
 
     public User(String username, String email, String password) {
         this.username = username;
