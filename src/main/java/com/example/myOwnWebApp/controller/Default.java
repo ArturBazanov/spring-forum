@@ -41,7 +41,6 @@ public class Default {
     }
     @PostMapping("/new")
     public String addNewUser(User user, Model model) {
-        //System.out.println(user.getUsername()+" "+user.getEmail());
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
