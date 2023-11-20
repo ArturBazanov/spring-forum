@@ -1,42 +1,34 @@
-package com.example.myOwnWebApp.config;
+package com.github.cloudbonus.forum.security;
 
-import com.example.myOwnWebApp.model.User;
+import com.github.cloudbonus.forum.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
-public class UserInfoUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
+    private final User user;
 
-    private String username;
-    private String password;
-    private List<GrantedAuthority> authorities;
-
-    public UserInfoUserDetails(User user) {
-        username = user.getUsername();
-        password = user.getPassword();
-        authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.name()))
-                .collect(Collectors.toList());
+    public UserDetailsImpl(User user) {
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return this.user.getUsername();
     }
 
     @Override
@@ -57,5 +49,9 @@ public class UserInfoUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return this.user;
     }
 }

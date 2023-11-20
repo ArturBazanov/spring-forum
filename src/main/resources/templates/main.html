@@ -8,9 +8,6 @@
 <h1>Message Board</h1>
 
 <form method="post" th:action="@{/}">
-    <label for="tag">Tag:</label>
-    <input type="text" id="tag" name="tag"><br>
-
     <label for="text">Message:</label>
     <textarea id="text" name="text"></textarea><br>
 
@@ -23,7 +20,7 @@
 <ul>
     <li th:each="message : ${messages}">
         <strong th:text="${message.id}"/>
-        <strong th:text="${message.tag}"/>: <span th:text="${message.text}"/>
+        <strong>comment</strong>: <span th:text="${message.text}"/>
     </li>
 </ul>
 </body>

@@ -1,4 +1,4 @@
-package com.example.myOwnWebApp;
+package com.github.cloudbonus.forum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.example.myOwnWebApp;
+package com.github.cloudbonus.forum;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
