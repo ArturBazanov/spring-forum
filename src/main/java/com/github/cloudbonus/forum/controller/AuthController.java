@@ -24,14 +24,20 @@ public class AuthController {
         this.registrationService = registrationService;
     }
 
+    @GetMapping("/login")
+    public String logIn() {
+        return "auth/login";
+    }
+
     @GetMapping("/signup")
     public String signUp(@ModelAttribute("user") User user) {
         return "auth/signup";
     }
+
     @PostMapping("/signup")
     public String performSignUp(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors()) return "/auth/signup";
+        if (bindingResult.hasErrors()) return "auth/signup";
         registrationService.register(user);
         return "redirect:/auth/login";
     }

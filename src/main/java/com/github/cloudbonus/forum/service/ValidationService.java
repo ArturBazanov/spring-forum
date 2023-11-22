@@ -15,6 +15,6 @@ public class ValidationService {
         this.userRepository = userRepository;
     }
     public Optional<User> findUser(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByEmailIgnoreCase(username);
     }
 }

@@ -1,11 +1,8 @@
 package com.github.cloudbonus.forum.util;
 
 import com.github.cloudbonus.forum.model.User;
-import com.github.cloudbonus.forum.service.RegistrationService;
-import com.github.cloudbonus.forum.service.UserDetailsServiceImpl;
 import com.github.cloudbonus.forum.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -29,8 +26,8 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        Optional<User> result = validationService.findUser(user.getUsername());
+        Optional<User> result = validationService.findUser(user.getEmail());
         if (result.isEmpty()) return;
-        errors.rejectValue("username", "", "A user with this name already exists.");
+        errors.rejectValue("email", "", "A user with this email already exists.");
     }
 }

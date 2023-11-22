@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 public class User{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
 
@@ -26,7 +26,7 @@ public class User{
 
     @NotEmpty(message = "The email must not be empty.")
     @Email(message = "The email must be valid.")
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
